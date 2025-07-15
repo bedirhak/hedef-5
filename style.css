@@ -11,6 +11,7 @@
     --player-1: blue;
     --player-2: red;
     --current-player: blue;
+    --game-cell-size: 50px;
 }
 
 .main-container {
@@ -39,15 +40,15 @@
     box-sizing: content-box;
     position: relative;
 
-    width: calc((var(--column) * 50px) + ((var(--column) - 1) * 10px));
-    height: calc((var(--row) * 50px) + ((var(--row) - 1) * 10px));
+    width: calc((var(--column) * var(--game-cell-size)) + ((var(--column) - 1) * 10px));
+    height: calc((var(--row) * var(--game-cell-size)) + ((var(--row) - 1) * 10px));
     z-index: 0;
 }
 
 .game-cell {
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: var(--game-cell-size);
+    height: var(--game-cell-size);
     border-radius: 50%;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.3);
@@ -73,13 +74,12 @@
 .shadow {
     content: "";
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: var(--game-cell-size);
+    height: var(--game-cell-size);
     border-radius: 50%;
     background-color: var(--current-player);
     transition: all 300ms ease;
     cursor: pointer;
-
 }
 
 .next-player {
@@ -89,8 +89,8 @@
 
 .current-player {
     display: inline-block;
-    width: 50px;
-    height: 50px;
+    width: var(--game-cell-size);
+    height: var(--game-cell-size);
     border-radius: 50%;
     background-color: var(--current-player);
     margin: 0 10px;

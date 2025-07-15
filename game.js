@@ -1,5 +1,6 @@
 $(document).ready(() => {
     let game;
+    let cellSize = 50;
 
     const startGame = () => {
         // Tüm hücreler ve cursor'ı temizle
@@ -21,7 +22,7 @@ $(document).ready(() => {
             }
         }
 
-        $(".game-table").append('<div class="cursor"></div>');
+        $(".game-table").append('<div class="cursor"></div><div class="shadow"></div>');
 
         // Eventleri tekrar ata, çünkü yeni elemanlar var
         handleEvents();
@@ -31,13 +32,13 @@ $(document).ready(() => {
     const handleEvents = () => {
         $(".game-cell").on("mouseenter", function () {
             let column = $(this).data("column");
-            let left = 30 + (column - 1) * 60;
+            console.log("CellSize: ", cellSize);
+            let left = (cellSize / 2 - 9) + (column - 1) * (cellSize + 10);
             let top = game.row - game.board[`column${column}`] - 1;
 
-            $(".cursor").css("left", `${left}px`);
-            $(".shadow").css("left", `${left - 14}px`).css("top", `${(top * 60) + 16}px`);
+            $(".cursor").css("left", `${left + 14}px`);
 
-
+            $(".shadow").css("left", `${left}px`).css("top", `${(top * (cellSize + 10)) + 16}px`);
         });
 
         $(".game-cell").on("click", function () {
@@ -75,6 +76,21 @@ $(document).ready(() => {
 
             } else {
                 alert("Başka bir hücre seçin!");
+            }
+        });
+
+        $(window).on("resize", function () {
+            console.log($(this).width());
+
+            if ($(this).width() <= 350) {
+                document.documentElement.style.setProperty('--game-cell-size', '20px');
+                cellSize = 20;
+            } else if ($(this).width() <= 530) {
+                document.documentElement.style.setProperty('--game-cell-size', '30px');
+                cellSize = 30;
+            } else {
+                document.documentElement.style.setProperty('--game-cell-size', '50px');
+                cellSize = 50;
             }
         });
 
