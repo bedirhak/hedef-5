@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --column: 8;
+    --row: 7;
+    --board-color: #13505c;
+    --player-1: blue;
+    --player-2: red;
+    --current-player: blue;
+}
+
+.main-container {
+    display: flex;
+    width: 80vw;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-title {
+    margin-bottom: 16px;
+}
+
+.next-player {
+    margin-bottom: 50px;
+}
+
+.game-table {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px;
+    background-color: var(--board-color);
+    box-sizing: content-box;
+    position: relative;
+
+    width: calc((var(--column) * 50px) + ((var(--column) - 1) * 10px));
+    height: calc((var(--row) * 50px) + ((var(--row) - 1) * 10px));
+    z-index: 0;
+}
+
+.game-cell {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+.cursor {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid #13505c;
+    top: -20px;
+    left: 30px;
+    transition: all 300ms ease;
+
+}
+
+.shadow {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--current-player);
+    transition: all 300ms ease;
+    cursor: pointer;
+
+}
+
+.next-player {
+    display: flex;
+    align-items: center;
+}
+
+.current-player {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--current-player);
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.player-1 {
+    background-color: var(--player-1);
+}
+
+.player-2 {
+    background-color: var(--player-2);
+}
